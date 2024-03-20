@@ -69,9 +69,12 @@
               >Rating:</label
             >
             <input
-              type="text"
+              type="number"
               id="book-rating"
               class="bg-gray-100 border border-gray-400 text-gray-900 text-sm rounded-lg focus:ring-slate-500 focus:border-slate-500 block w-full p-2.5"
+              value=""
+              min="1"
+              max="10"
               required
             />
           </div>
@@ -82,7 +85,7 @@
               >Image:</label
             >
             <input
-              type="text"
+              type="url"
               id="book-image"
               class="bg-gray-100 border border-gray-400 text-gray-900 text-sm rounded-lg focus:ring-slate-500 focus:border-slate-500 block w-full p-2.5"
               required
