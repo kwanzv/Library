@@ -6,16 +6,6 @@ showForm.addEventListener("click", () => {
   form.classList.toggle("hidden");
 });
 
-form.addEventListener("submit", (event) => {
-  event.preventDefault();
-  let bookName = document.getElementById("book-name").value;
-  let bookAuthor = document.getElementById("book-author").value;
-  let bookRating = document.getElementById("book-rating").value;
-  let bookImage = document.getElementById("book-image").value;
-  addBookToLibrary(bookName, bookAuthor, bookRating, bookImage);
-  document.querySelector("form").reset();
-});
-
 const bookList = [
   new Book(
     "Lord of the Rings",
@@ -31,26 +21,57 @@ const bookList = [
   ),
 ];
 
+if (localStorage.getItem("bookList") === null) {
+  localStorage.setItem("bookList", JSON.stringify(bookList));
+}
+
+console.log(JSON.parse(localStorage.getItem("bookList")));
+
+form.addEventListener("submit", (event) => {
+  event.preventDefault();
+  let bookName = document.getElementById("book-name").value;
+  let bookAuthor = document.getElementById("book-author").value;
+  let bookRating = document.getElementById("book-rating").value;
+  let bookImage = document.getElementById("book-image").value;
+  addBookToLibrary(bookName, bookAuthor, bookRating, bookImage);
+  document.querySelector("form").reset();
+});
+
+function ShowStars(rating) {
+  let stars = "";
+  for (let i = 0; i < rating; i++) {
+    stars += `<i class="fa-solid fa-star"></i>`;
+  }
+  return stars;
+}
+
 function Book(title, author, rating, img) {
   this.title = title;
   this.author = author;
-  this.rating = rating;
+  this.rating = ShowStars(rating);
   this.img = img;
 }
 
 function addBookToLibrary(name, author, rating, image) {
+  if (!name || !author || !rating || !image) {
+    alert("Please fill in all fields");
+    return;
+  }
+
   bookList.push(new Book(name, author, rating, image));
+  localStorage.setItem("bookList", JSON.stringify(bookList));
   updateBooks();
 }
 
 function updateBooks() {
   showBooks.innerHTML = "";
+  const bookList = JSON.parse(localStorage.getItem("bookList"));
   bookList.forEach((book) =>
     showBooks.insertAdjacentHTML(
       "beforeend",
-      `<div class="flex flex-col w-full items-center rounded-xl"> <h1 class="text-2xl font-semibold text-center">${book.title}</h1>
+      `<div class="flex flex-col gap-4 items-center rounded-xl border border-black p-4"> <h1 class="text-2xl font-semibold ">${book.title}</h1>
   <p class="text-center">Author: ${book.author}</p>
-  <p class="text-center">Rating: ${book.rating}</p>
+  <p class="text-center">Rating: ${book.rating} </p>
   <img src="${book.img}" class="w-1/4 rounded-xl">
   </div>`
     )

@@ -25,7 +25,7 @@
         class="input p-4 bg-white h-full w-full lg:w-3/4 rounded-xl text-black"
       >
         <h1 class="text-2xl font-semibold text-center">Add your books</h1>
-        <p class="pt-8">
+        <p class="pt-8 text-center">
           You can add your favorite books down below using the form
         </p>
         <button
@@ -44,6 +44,7 @@
             <input
               type="text"
               id="book-name"
+              name="book-name"
               class="bg-gray-100 border border-gray-400 text-gray-900 text-sm rounded-lg focus:ring-slate-500 focus:border-slate-500 block w-full p-2.5"
               required
             />
@@ -57,6 +58,7 @@
             <input
               type="text"
               id="book-author"
+              name="book-author"
               class="bg-gray-100 border border-gray-400 text-gray-900 text-sm rounded-lg focus:ring-slate-500 focus:border-slate-500 block w-full p-2.5"
               required
             />
@@ -71,6 +73,7 @@
             <input
               type="number"
               id="book-rating"
+              name="book-rating"
               class="bg-gray-100 border border-gray-400 text-gray-900 text-sm rounded-lg focus:ring-slate-500 focus:border-slate-500 block w-full p-2.5"
               value=""
               min="1"
@@ -87,6 +90,7 @@
             <input
               type="url"
               id="book-image"
+              name="book-image"
               class="bg-gray-100 border border-gray-400 text-gray-900 text-sm rounded-lg focus:ring-slate-500 focus:border-slate-500 block w-full p-2.5"
               required
             />
@@ -99,9 +103,11 @@
         </form>
         <div class="book-preview">
           <h1 class="text-center text-2xl font-semibold pt-12">
-            Current book library
+            Current library
           </h1>
-          <div class="book-list mt-8 grid md:grid-cols-2 gap-2"></div>
+          <div
+            class="book-list mt-8 grid md:grid-cols-3 grid-cols-1 gap-4"
+          ></div>
         </div>
       </div>
     </section>
